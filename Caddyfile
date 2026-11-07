@@ -1,0 +1,9 @@
+{$DOMAIN} {
+	# RSA-ключ → цепочка Let's Encrypt до ISRG Root X1: её знают и старые клиенты
+	# (ECDSA-цепочка идёт до ISRG Root X2, и часть систем её не принимает).
+	tls {
+		key_type rsa2048
+	}
+	encode gzip
+	reverse_proxy app:8000
+}

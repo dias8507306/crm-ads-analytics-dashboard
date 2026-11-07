@@ -1,0 +1,42 @@
+# Сервер: приложение + Caddy (HTTPS для домена из .env). Наружу открыты только 80 и 443.
+# Журналы контейнеров ограничены: не больше 3 файлов по 10 МБ на сервис.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  app:
+    logging: *logging
+    build: .
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8000"
+      DB_PATH: /app/data/leads.db
+      COOKIE_SECURE: "1"
+      DEMO_MODE: "${DEMO_MODE:-0}"   # на сервере — боевой режим
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.8
+    logging: *logging
+    environment:
+      DOMAIN: ${DOMAIN:?впишите DOMAIN в .env}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

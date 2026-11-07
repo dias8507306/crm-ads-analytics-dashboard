@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Обращения 7000</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/dashboard.js" defer></script>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Обращения на WhatsApp 7000</h1>
+      <p class="muted small" id="status">Загрузка…</p>
+    </div>
+    <a href="/logout">Выйти</a>
+  </header>
+
+  <section class="controls" aria-label="Период">
+    <div class="presets">
+      <button type="button" data-preset="today">Сегодня</button>
+      <button type="button" data-preset="yesterday">Вчера</button>
+      <button type="button" data-preset="7">7 дней</button>
+      <button type="button" data-preset="30">30 дней</button>
+      <button type="button" data-preset="month">Этот месяц</button>
+    </div>
+    <label>с <input type="date" id="from"></label>
+    <label>по <input type="date" id="to"></label>
+    <button type="button" id="apply" class="primary">Показать</button>
+    <a id="csv" class="button" href="#">Скачать CSV</a>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi">
+      <div class="kpi-label">Всего обращений</div>
+      <div class="kpi-value" id="k-all">—</div>
+      <div class="kpi-sub" id="k-period"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">С таргета</div>
+      <div class="kpi-value" id="k-ad">—</div>
+      <div class="kpi-sub" id="k-ad-share"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Органика (без рекламы)</div>
+      <div class="kpi-value" id="k-organic">—</div>
+      <div class="kpi-sub" id="k-organic-share"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Креатив → обращений</h2>
+    <p class="muted small">Нажмите на строку — ниже останутся только обращения с этого креатива.</p>
+    <div class="table-wrap">
+      <table id="creatives">
+        <thead><tr><th>Креатив</th><th>Площадка</th><th>Кампания / группа</th><th class="num">Обращений</th><th>Доля</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Обращения</h2>
+      <div class="seg" id="source">
+        <button type="button" data-source="all" class="active">Все</button>
+        <button type="button" data-source="ad">Таргет</button>
+        <button type="button" data-source="organic">Органика</button>
+      </div>
+    </div>
+    <p class="small" id="filter-note" hidden>
+      Креатив: <b id="filter-name"></b> <button type="button" class="linklike" id="clear-filter">показать все</button>
+    </p>
+    <div class="table-wrap">
+      <table id="inquiries">
+        <thead><tr><th>Когда</th><th>Клиент</th><th>Откуда</th><th>Креатив</th><th>Первое сообщение</th><th class="num">Сообщ.</th><th>amoCRM</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="muted small" id="truncated" hidden></p>
+  </section>
+</main>
+</body>
+</html>

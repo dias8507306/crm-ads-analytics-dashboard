@@ -1,0 +1,26 @@
+# secrets
+.env
+.env.*
+!.env.example
+deploy/server.env
+
+# data
+data/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.log
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# misc
+node_modules/
+.vercel/
+.idea/
+.vscode/
+.DS_Store

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вход — обращения 7000</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="login">
+  <h1>Обращения 7000</h1>
+  <p class="muted">Вход в дашборд</p>
+  <form method="post" action="/login">
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password" autocomplete="current-password" required autofocus>
+    <p class="error">{{error}}</p>
+    <button type="submit" class="primary">Войти</button>
+  </form>
+</main>
+</body>
+</html>
